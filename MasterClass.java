@@ -27,12 +27,17 @@ public class MasterClass {
 				incorrectGuess(letter);
 			}
 			printAnswerSoFar();
+			drawHangman();
 		}
 		userLost(); //ran out of guesses
 		
 
 	}
 	
+	private static void drawHangman() {
+		// TODO Auto-generated method stub
+	}
+
 	//helper methods to ease transition into android
 	public static void print(String s){
 		System.out.print(s);
