@@ -70,7 +70,8 @@ public class MainActivity extends Activity {
 	//checks if 'text' has already been guessed
 	//returns true if already guessed
 	private boolean didGuess(String text) {
-		if (mGuessedString.contains(text))
+		String charsString = mGuessedString.substring(mGuessedString.indexOf(":")+1);
+		if (charsString.contains(text))
 			return true;
 		return false;
 	}
