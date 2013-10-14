@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
+	//Matt is commenting to see if he can actually push changes from eclipse.
+	
+	
 	private EditText mEditText;
 	private TextView mGuessedTextView, mCorrectlyGuessedTextView;
 	private String mGuessedString = "";
