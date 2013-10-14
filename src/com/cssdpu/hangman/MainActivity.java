@@ -85,6 +85,9 @@ public class MainActivity extends Activity {
 		final String text = getEditText().getText().toString().toUpperCase();
 		getEditText().setText(""); //erase text
 		
+		if (text.length() == 0)
+			return;
+		
 		if (didGuess(text)) {
 			showToast(text+" was already guessed!");
 			return; //don't penalize - just have them guess again
