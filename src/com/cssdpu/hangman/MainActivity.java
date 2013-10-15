@@ -53,6 +53,9 @@ public class MainActivity extends Activity {
 	    }
 	}
 	
+	/**
+	 * Replaces the current word and clears the current guess.
+	 */
 	private void resetGame() {
 		mCurrentWord = null;
 		mGuessedString = "";
@@ -68,6 +71,12 @@ public class MainActivity extends Activity {
 		getCorrectlyGuessedTextView().setText(underscoreWord);
 	}
 	
+	/**
+	 * Displays a toast message
+	 * 
+	 * @param message
+	 * 		the message to be displayed
+	 */
 	private void showToast(String message) {
 		Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
 	}
@@ -81,12 +90,26 @@ public class MainActivity extends Activity {
 		return false;
 	}
 	
+	/**
+	 * Determines whether or not the user has guessed correctly.
+	 * 
+	 * @param text
+	 * 		The text guessed by the user.
+	 * @return
+	 * 		True if the user guess is in the Word.
+	 */
 	private boolean isCorrectGuess(String text) {
 		if (getCurrentWord().contains(text))
 			return true;
 		return false;
 	}
 	
+	/**
+	 * Submits a guess.
+	 * 
+	 * @param view
+	 * 		Not exactly sure.
+	 */
 	public void onSubmitPress(View view) {
 		final String text = getEditText().getText().toString().toUpperCase();
 		getEditText().setText(""); //erase text
@@ -118,6 +141,10 @@ public class MainActivity extends Activity {
 		
 	}
 	
+	/**
+	 * 
+	 * @param text
+	 */
 	private void addToGuessedString(String text) {
 		if (mGuessedString.length() == 0)
 			mGuessedString = "Guessed: ";
@@ -126,6 +153,12 @@ public class MainActivity extends Activity {
 		getGuessedTextView().setText(mGuessedString);
 	}
 	
+	/**
+	 * Generates a new word from the array of words.
+	 * 
+	 * @return
+	 * 		a new word in all uppercase.
+	 */
 	private String generateRandomWord() {
 		int rand = new Random().nextInt(WORDS.length);
 		return WORDS[rand].toUpperCase();
