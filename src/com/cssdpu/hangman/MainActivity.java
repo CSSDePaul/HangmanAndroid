@@ -20,10 +20,14 @@ public class MainActivity extends Activity {
 	
 	private EditText mEditText;
 	private TextView mGuessedTextView, mCorrectlyGuessedTextView;
+	private TextView mFailureCount; //TODO: We'll replace this with a visual representation eventually
 	private String mGuessedString = "";
+	private int mWrongGuesses = 0;
 	
 	private String mCurrentWord;
-
+	
+	private static final int FAILURE_LIMIT = 6; //TODO:placeholder value (head, body 2 legs, 2 arms)
+	
 	private static final String[] WORDS = new String[] {
 		"Belly", "Runner", "Chicago", "DePaul", "Fake"
 	};
@@ -62,6 +66,7 @@ public class MainActivity extends Activity {
 		getEditText().setText("");
 		getGuessedTextView().setText("");
 		getCorrectlyGuessedTextView().setText("");
+		getFailureTextView().setText("0 / " + FAILURE_LIMIT );
 		//reset other stuff here
 		
 		//Generate new word
@@ -104,6 +109,18 @@ public class MainActivity extends Activity {
 		return false;
 	}
 	
+	private void guessWasWrong(){
+		//TODO: add a body part to the screen.
+
+		mWrongGuesses++;
+		mFailureCount.setText("" + mWrongGuesses + " / " + FAILURE_LIMIT + "");
+		if(mWrongGuesses >= FAILURE_LIMIT){
+			showToast("You've failed. Game restarting.");
+			resetGame();
+		}
+	}
+	
+	
 	/**
 	 * Submits a guess.
 	 * 
@@ -123,6 +140,8 @@ public class MainActivity extends Activity {
 		}
 		
 		//add to guess string (doesn't matter if wrong or right guess)
+		
+		//TODO: Maybe it shouldn't add correct guesses? -Matt
 		addToGuessedString(text);
 		
 		if (isCorrectGuess(text)) {
@@ -136,8 +155,12 @@ public class MainActivity extends Activity {
 				index = currWord.indexOf(text, index+1);
 			}
 			getCorrectlyGuessedTextView().setText(currentCorrectText);
-		}
 		
+		}
+		else
+		{
+			guessWasWrong();
+		}
 		
 	}
 	
@@ -184,10 +207,16 @@ public class MainActivity extends Activity {
 		return mCorrectlyGuessedTextView;
 	}
 	
+	public TextView getFailureTextView(){
+		if (mFailureCount == null)
+			mFailureCount = (TextView) findViewById(R.id.failureCount);
+		return mFailureCount;
+	}
+	
 	public EditText getEditText() {
 		if (mEditText == null)
 			mEditText = (EditText) findViewById(R.id.editText);
 		return mEditText;
 	}
-
+	
 }

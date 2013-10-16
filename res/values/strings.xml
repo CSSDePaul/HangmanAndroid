@@ -7,4 +7,6 @@
 
 	<string name="buttonText">Submit</string>
 
+	<string name="failureCount">0 / 6</string>
+
 </resources>
