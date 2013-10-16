@@ -7,17 +7,14 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	//Matt is commenting to see if he can actually push changes from eclipse.
-	//Zac is doing the same
-	//Hey Zac, how are you? -Matt
-	
-	
+	private Button mGuessButton;
 	private EditText mEditText;
 	private TextView mGuessedTextView, mCorrectlyGuessedTextView;
 	private TextView mFailureCount; //TODO: We'll replace this with a visual representation eventually
@@ -67,6 +64,7 @@ public class MainActivity extends Activity {
 		getGuessedTextView().setText("");
 		getCorrectlyGuessedTextView().setText("");
 		getFailureTextView().setText("0 / " + FAILURE_LIMIT );
+		mWrongGuesses = 0;
 		//reset other stuff here
 		
 		//Generate new word
@@ -115,7 +113,7 @@ public class MainActivity extends Activity {
 		mWrongGuesses++;
 		mFailureCount.setText("" + mWrongGuesses + " / " + FAILURE_LIMIT + "");
 		if(mWrongGuesses >= FAILURE_LIMIT){
-			showToast("You've failed. Game restarting.");
+			showToast("You've failed.");
 			resetGame();
 		}
 	}
@@ -217,6 +215,12 @@ public class MainActivity extends Activity {
 		if (mEditText == null)
 			mEditText = (EditText) findViewById(R.id.editText);
 		return mEditText;
+	}
+	
+	public Button getButton(){
+		if (mGuessButton == null)
+			mGuessButton = (Button) findViewById(R.id.guessButton);
+		return mGuessButton;
 	}
 	
 }

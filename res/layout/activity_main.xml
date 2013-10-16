@@ -59,13 +59,13 @@
   	    android:layout_marginRight="90dp"
   	    />  
   	    
-  	<Button 
-  	    android:text="@string/buttonText"
+  	<Button
+  	    android:id="@+id/guessButton"
   	    android:layout_width="wrap_content"
   	    android:layout_height="wrap_content"
   	    android:layout_alignParentBottom="true"
   	    android:layout_alignParentRight="true"
   	    android:onClick="onSubmitPress"
-  	    />
+  	    android:text="@string/buttonText" />
 
 </RelativeLayout>
