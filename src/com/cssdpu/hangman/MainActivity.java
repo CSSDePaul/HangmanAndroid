@@ -113,8 +113,7 @@ public class MainActivity extends Activity {
 		mWrongGuesses++;
 		mFailureCount.setText("" + mWrongGuesses + " / " + FAILURE_LIMIT + "");
 		if(mWrongGuesses >= FAILURE_LIMIT){
-			showToast("You've failed.");
-			resetGame();
+			showToast("You've failed. Restart from the Options Menu");
 		}
 	}
 	
