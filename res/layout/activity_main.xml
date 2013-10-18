@@ -18,6 +18,12 @@
     		android:layout_height="wrap_content"
     		android:orientation="vertical"
             >
+
+            <ImageView
+                android:id="@+id/headView"
+                android:layout_width="94dp"
+                android:layout_height="94dp"
+                android:src="@drawable/head" />
             
           	<TextView
 		        android:id="@+id/correctlyGuessedTextView"

@@ -9,11 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
+	private ImageView mHead;
 	private Button mGuessButton;
 	private EditText mEditText;
 	private TextView mGuessedTextView, mCorrectlyGuessedTextView;
@@ -65,12 +67,13 @@ public class MainActivity extends Activity {
 		getCorrectlyGuessedTextView().setText("");
 		getFailureTextView().setText("0 / " + FAILURE_LIMIT );
 		mWrongGuesses = 0;
+		updateBody();
 		//reset other stuff here
 		
 		//Generate new word
 		mCurrentWord = generateRandomWord();
 		
-		String underscoreWord = getCurrentWord().replaceAll("[A-Za-z]", "_");
+		String underscoreWord = getCurrentWord().replaceAll("[A-Za-z]", "_ ");
 		getCorrectlyGuessedTextView().setText(underscoreWord);
 	}
 	
@@ -112,11 +115,24 @@ public class MainActivity extends Activity {
 
 		mWrongGuesses++;
 		mFailureCount.setText("" + mWrongGuesses + " / " + FAILURE_LIMIT + "");
+		updateBody();
 		if(mWrongGuesses >= FAILURE_LIMIT){
 			showToast("You've failed. Restart from the Options Menu");
 		}
 	}
-	
+	/**
+	 * Updates the body based on the number of wrong guesses.
+	 */
+	private void updateBody(){
+		if (mWrongGuesses == 0)
+		{
+			getHead().setVisibility(ImageView.INVISIBLE);
+		}
+		else if (mWrongGuesses == 1)
+		{
+			mHead.setVisibility(ImageView.VISIBLE);
+		}
+	}
 	
 	/**
 	 * Submits a guess.
@@ -146,12 +162,18 @@ public class MainActivity extends Activity {
 			
 			StringBuilder currentCorrectText = new StringBuilder(getCorrectlyGuessedTextView().getText().toString());
 			final String currWord = getCurrentWord();
-			int index = currWord.indexOf(text);
+			
+			/*I doubled this value because I changed the string of
+			 *guesses to have spaces between underscores for readability
+			 *-Matt
+			 */
+			int index = currWord.indexOf(text) *2;
 			while (index != -1) {
 				currentCorrectText.setCharAt(index, text.charAt(0));
 				index = currWord.indexOf(text, index+1);
 			}
 			getCorrectlyGuessedTextView().setText(currentCorrectText);
+			getHead();
 		
 		}
 		else
@@ -220,6 +242,13 @@ public class MainActivity extends Activity {
 		if (mGuessButton == null)
 			mGuessButton = (Button) findViewById(R.id.guessButton);
 		return mGuessButton;
+		
+	}
+	
+	public ImageView getHead(){
+		if (mHead == null)
+			mHead = (ImageView) findViewById(R.id.headView);
+		return mHead;
 	}
 	
 }
