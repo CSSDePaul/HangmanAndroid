@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
 		//Generate new word
 		mCurrentWord = generateRandomWord();
 		
-		String underscoreWord = getCurrentWord().replaceAll("[A-Za-z]", "_ ");
+		String underscoreWord = getCurrentWord().replaceAll("[A-Za-z]", "_");
 		getCorrectlyGuessedTextView().setText(underscoreWord);
 	}
 	
@@ -164,11 +164,17 @@ public class MainActivity extends Activity {
 			final String currWord = getCurrentWord();
 			
 			/*I doubled this value because I changed the string of
-			 *guesses to have spaces between underscores for readability
+			 *guesses to have spaces between underscores for readability.
 			 *-Matt
 			 */
-			int index = currWord.indexOf(text) *2;
+			
+			/**
+			 * TODO: WHOOPS. This breaks shit when you have a word like BELLY where the same
+			 * character is in the word twice.
+			 */
+			int index = currWord.indexOf(text);
 			while (index != -1) {
+				
 				currentCorrectText.setCharAt(index, text.charAt(0));
 				index = currWord.indexOf(text, index+1);
 			}
