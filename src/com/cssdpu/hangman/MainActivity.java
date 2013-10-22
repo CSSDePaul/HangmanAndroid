@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
 		//Generate new word
 		mCurrentWord = generateRandomWord();
 		
-		String underscoreWord = getCurrentWord().replaceAll("[A-Za-z]", "_");
+		String underscoreWord = getCurrentWord().replaceAll("[A-Za-z]", "_ ");
 		getCorrectlyGuessedTextView().setText(underscoreWord);
 	}
 	
@@ -175,7 +175,7 @@ public class MainActivity extends Activity {
 			int index = currWord.indexOf(text);
 			while (index != -1) {
 				
-				currentCorrectText.setCharAt(index, text.charAt(0));
+				currentCorrectText.setCharAt(index*2, text.charAt(0));
 				index = currWord.indexOf(text, index+1);
 			}
 			getCorrectlyGuessedTextView().setText(currentCorrectText);
@@ -208,8 +208,9 @@ public class MainActivity extends Activity {
 	 * 		a new word in all uppercase.
 	 */
 	private String generateRandomWord() {
-		int rand = new Random().nextInt(WORDS.length);
-		return WORDS[rand].toUpperCase();
+		return "BELLY";
+//		int rand = new Random().nextInt(WORDS.length);
+//		return WORDS[rand].toUpperCase();
 	}
 	
 	
@@ -248,7 +249,6 @@ public class MainActivity extends Activity {
 		if (mGuessButton == null)
 			mGuessButton = (Button) findViewById(R.id.guessButton);
 		return mGuessButton;
-		
 	}
 	
 	public ImageView getHead(){
