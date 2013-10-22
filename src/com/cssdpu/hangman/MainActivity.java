@@ -163,15 +163,6 @@ public class MainActivity extends Activity {
 			StringBuilder currentCorrectText = new StringBuilder(getCorrectlyGuessedTextView().getText().toString());
 			final String currWord = getCurrentWord();
 			
-			/*I doubled this value because I changed the string of
-			 *guesses to have spaces between underscores for readability.
-			 *-Matt
-			 */
-			
-			/**
-			 * TODO: WHOOPS. This breaks shit when you have a word like BELLY where the same
-			 * character is in the word twice.
-			 */
 			int index = currWord.indexOf(text);
 			while (index != -1) {
 				
@@ -208,9 +199,8 @@ public class MainActivity extends Activity {
 	 * 		a new word in all uppercase.
 	 */
 	private String generateRandomWord() {
-		return "BELLY";
-//		int rand = new Random().nextInt(WORDS.length);
-//		return WORDS[rand].toUpperCase();
+		int rand = new Random().nextInt(WORDS.length);
+		return WORDS[rand].toUpperCase();
 	}
 	
 	
