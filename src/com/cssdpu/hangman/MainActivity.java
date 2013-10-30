@@ -24,7 +24,8 @@ public class MainActivity extends Activity {
 	private TextView mGuessedTextView, mCorrectlyGuessedTextView;
 	private TextView mFailureCount; //TODO: We'll replace this with a visual representation eventually
 	private String mGuessedString = "";
-	private ArrayList<String> mGuessedStringList = new ArrayList<String>();
+	private ArrayList<String> mAllGuessedStringList = new ArrayList<String>();//list of all guessed letters
+	private ArrayList<String> mWrongGuessedStringList = new ArrayList<String>();//list of incorrect guessed letters
 	private int mWrongGuesses = 0;
 	
 	private String mCurrentWord;
@@ -95,7 +96,7 @@ public class MainActivity extends Activity {
 	//returns true if already guessed
 	private boolean didGuess(String text) {
 		String charsString = mGuessedString.substring(mGuessedString.indexOf(":")+1);
-		if (charsString.contains(text))
+		if (mAllGuessedStringList.contains(text))
 			return true;
 		return false;
 	}
@@ -156,9 +157,8 @@ public class MainActivity extends Activity {
 			return; //don't penalize - just have them guess again
 		}
 		
-		//add to guess string (doesn't matter if wrong or right guess)
-		
-		//TODO: Maybe it shouldn't add correct guesses? -Matt
+		//add to list of all guessed letters (doesn't matter if wrong or right guess)
+		mAllGuessedStringList.add(text);
 		
 		if (isCorrectGuess(text)) {
 			showToast("Correct!");
@@ -168,16 +168,13 @@ public class MainActivity extends Activity {
 			
 			int index = currWord.indexOf(text);
 			while (index != -1) {
-				
 				currentCorrectText.setCharAt(index*2, text.charAt(0));
 				index = currWord.indexOf(text, index+1);
 			}
 			getCorrectlyGuessedTextView().setText(currentCorrectText);
 			getHead();
-		
 		}
-		else
-		{
+		else {
 			guessWasWrong();
 			addToGuessedString(text);
 		}
@@ -190,13 +187,13 @@ public class MainActivity extends Activity {
 	 * @param text the letter guessed
 	 */
 	private void addToGuessedString(String text) {
-		mGuessedStringList.add(text);
+		mWrongGuessedStringList.add(text);
 		
-		Collections.sort(mGuessedStringList);
+		Collections.sort(mWrongGuessedStringList);
 		
 		mGuessedString = "Guessed: ";
 		
-		for (String s : mGuessedStringList) {
+		for (String s : mWrongGuessedStringList) {
 			mGuessedString += s;
 		}
 		
@@ -207,7 +204,7 @@ public class MainActivity extends Activity {
 	 * Generates a new word from the array of words.
 	 * 
 	 * @return
-	 * 		a new word in all uppercase.
+	 * 		a new word in all upper case.
 	 */
 	private String generateRandomWord() {
 		int rand = new Random().nextInt(WORDS.length);
