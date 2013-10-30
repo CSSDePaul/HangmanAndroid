@@ -155,7 +155,6 @@ public class MainActivity extends Activity {
 		//add to guess string (doesn't matter if wrong or right guess)
 		
 		//TODO: Maybe it shouldn't add correct guesses? -Matt
-		addToGuessedString(text);
 		
 		if (isCorrectGuess(text)) {
 			showToast("Correct!");
@@ -176,6 +175,7 @@ public class MainActivity extends Activity {
 		else
 		{
 			guessWasWrong();
+			addToGuessedString(text);
 		}
 		
 	}
