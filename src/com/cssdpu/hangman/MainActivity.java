@@ -1,9 +1,12 @@
 package com.cssdpu.hangman;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +24,7 @@ public class MainActivity extends Activity {
 	private TextView mGuessedTextView, mCorrectlyGuessedTextView;
 	private TextView mFailureCount; //TODO: We'll replace this with a visual representation eventually
 	private String mGuessedString = "";
+	private ArrayList<String> mGuessedStringList = new ArrayList<String>();
 	private int mWrongGuesses = 0;
 	
 	private String mCurrentWord;
@@ -181,14 +185,21 @@ public class MainActivity extends Activity {
 	}
 	
 	/**
-	 * 
-	 * @param text
+	 * Adds guessed letter to list of guessed letters, sorts the list and
+	 * then sets the display text to the newly sorted list.
+	 * @param text the letter guessed
 	 */
 	private void addToGuessedString(String text) {
-		if (mGuessedString.length() == 0)
-			mGuessedString = "Guessed: ";
+		mGuessedStringList.add(text);
 		
-		mGuessedString += text;
+		Collections.sort(mGuessedStringList);
+		
+		mGuessedString = "Guessed: ";
+		
+		for (String s : mGuessedStringList) {
+			mGuessedString += s;
+		}
+		
 		getGuessedTextView().setText(mGuessedString);
 	}
 	
