@@ -72,6 +72,8 @@ public class MainActivity extends Activity {
 		getCorrectlyGuessedTextView().setText("");
 		getFailureTextView().setText("0 / " + FAILURE_LIMIT );
 		mWrongGuesses = 0;
+		mAllGuessedStringList = new ArrayList<String>();//list of all guessed letters
+		mWrongGuessedStringList = new ArrayList<String>();//list of incorrect guessed letters
 		updateBody();
 		//reset other stuff here
 		
